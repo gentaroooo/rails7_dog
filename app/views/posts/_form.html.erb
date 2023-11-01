@@ -11,6 +11,10 @@
     </div>
   <% end %>
 
+  <%= link_to "Fetch Images", new_post_path(fetch_images: true), method: :get, class: 'btn btn-primary' %>
+  <% if @image.present? %>
+    <img src="<%= @image %>" alt="Shibe Image" width="300">
+  <% end %>
   <div class="my-5">
     <%= form.label :title %>
     <%= form.text_area :title, rows: 4, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
