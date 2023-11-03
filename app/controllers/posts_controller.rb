@@ -13,9 +13,12 @@ class PostsController < ApplicationController
 
   def show
   end
-
+  
   def new
     @post = Post.new
+    response = Faraday.get("http://shibe.online/api/shibes?count=5&urls=true&httpsUrls=true")
+    @image = JSON.parse(response.body).first
+
     if params[:fetch_images]
       response = Faraday.get("http://shibe.online/api/shibes?count=5&urls=true&httpsUrls=true")
       @image = JSON.parse(response.body).first
@@ -54,6 +57,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:title, :body, :image)
     end
 end
